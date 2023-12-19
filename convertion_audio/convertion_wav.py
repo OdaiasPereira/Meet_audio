@@ -1,27 +1,35 @@
 from pydub import AudioSegment
 import os
 
-def convert_to_wav(input_file, output_file):
-    # Verifica se o arquivo de entrada existe
+def convert_to_wav(input_file, output_folder):
+    # Check if the input file exists
     if not os.path.exists(input_file):
-        print(f"O arquivo {input_file} não existe.")
+        print(f"The file {input_file} does not exist.")
         return
 
-    # Carrega o arquivo de áudio usando Pydub
+    # Load the audio file using Pydub
     audio = AudioSegment.from_file(input_file)
 
-    # Salva o arquivo no formato WAV
-    audio.export(output_file, format="wav")
+    # Extract the file name (without extension) from the input file path
+    input_file_name = os.path.splitext(os.path.basename(input_file))[0]
+
+    # Create the output file path by combining the output folder and the input file name with the .wav extension
+    output_file_path = os.path.join(output_folder, f"{input_file_name}.wav")
+
+    # Save the file in WAV format
+    audio.export(output_file_path, format="wav")
 
 if __name__ == "__main__":
-    # Solicita o caminho do arquivo de áudio
-    audio_file_path = input("Informe o caminho do arquivo de áudio: ")
+    # Ask for the path of the audio file
+    audio_file_path = input("Enter the path of the audio file: ")
 
-    # Define o caminho de saída para o arquivo WAV
-    wav_output_path = ("C:/Users/Odaias Pereira/PycharmProjects/convertion_log/convertion_audio/output_doc")
+    # Ask for the output folder where the WAV file should be saved
+    wav_output_folder = input("Enter the output folder path for the WAV file: ")
 
+    # Ensure that the output folder exists
+    os.makedirs(wav_output_folder, exist_ok=True)
 
-    # Chama a função para converter o arquivo para WAV
-    convert_to_wav(audio_file_path, wav_output_path)
+    # Call the function to convert the file to WAV
+    convert_to_wav(audio_file_path, wav_output_folder)
 
-    print(f"Conversão concluída. Arquivo WAV salvo em: {wav_output_path}")
+    print(f"Conversion completed. WAV file saved at: {os.path.join(wav_output_folder, os.path.basename(audio_file_path))}.wav")
