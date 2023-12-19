@@ -5,7 +5,6 @@ from docx import Document
 # Sua chave de API OpenAI
 api_key = "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"
 
-
 def rewrite_text(text_to_rewrite):
     # Output file for the rewritten content in .docx format
     #output_file = "C:/Users/odaia/PycharmProjects/Log_Generator"

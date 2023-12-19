@@ -2,7 +2,7 @@ import os
 import speech_recognition as sr
 from pydub import AudioSegment
 import rewrite3 as r
-from count_tokens as c  # Import the 'bird' function from the count_tokens module
+import count_tokens as ct  # Import the 'bird' function from the count_tokens module
 
 def transcribe_audio_file():
     # Ask the user for the audio file path
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     transcribed_text = transcribe_audio_file()
 
     # Call the 'bird' function to get the number of tokens and cost
-    tokens, cost = bird(transcribed_text)
+    tokens, cost = ct.manage_cost(transcribed_text)
 
     # Print the results
     print(f"Number of Tokens: {tokens}")
